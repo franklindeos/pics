@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app.routing.modules';
 import { AppComponent } from './app.component';
-import { PhotosModule } from './photos/photos.module';
 import { HttpClientModule } from '@angular/common/http';
+import { PhotosModule } from './photos/photos.module';
 
 @NgModule({
   declarations: [
@@ -12,8 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     PhotosModule,
+    AppRoutingModule,
     HttpClientModule
   ],
   providers: [],
