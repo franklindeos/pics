@@ -7,13 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { PhotosModule } from './photos/photos.module';
 import { ErrorsModule } from './errors/errors.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    PhotosModule,
     AppRoutingModule,
     HttpClientModule,
     ErrorsModule
