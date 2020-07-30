@@ -10,17 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 export class PhotoListComponent implements OnInit {
 
   title = 'Alurapic'
-  photos = [];
+  photos = []
+  filter: string = ''
+  nome = 'flavio'
   constructor(
     private photoService: PhotoService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    const userName = this.activatedRoute.snapshot.params.userName;
+    const userName = this.activatedRoute.snapshot.params.userName
     this.photoService
     .listFromUser(userName)
-    .subscribe(photos => this.photos = photos);
+    .subscribe(photos => this.photos = photos)
   }
 
 }
