@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Subject } from 'rxjs/internal/Subject'
 import { debounceTime } from 'rxjs/operators'
+import { PhotoService} from '../photo/photo.service'
 
 @Component({
   selector: 'app-photo-list',
@@ -14,16 +15,22 @@ export class PhotoListComponent implements OnInit,OnDestroy {
   photos = []
   filter: string = ''
   debounce: Subject<string> = new Subject<string>(); // Subject from RxJS
+
+  hasMore: boolean = true;
+  currentPage: number = 1;
+  userName: string = '';
   /**
    * debounce vai escutar a mudança no campo de filtro e após um tempo configurado via pipe
    * irá aplicar o filtro
    */
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private photoService: PhotoService
   ) { }
 
   ngOnInit(): void {
+    this.userName = this.activatedRoute.snapshot.params.userName;
     /**
      * Pega a informação já processada pelo resolver (photo-list.resolver.ts)
      * e preenche em photos
@@ -43,5 +50,17 @@ export class PhotoListComponent implements OnInit,OnDestroy {
      */
     this.debounce.unsubscribe();
   }
+
+  load() {
+    this.photoService
+        .listFromUserPaginated(this.userName, ++this.currentPage)
+        .subscribe(photos => {
+            this.photos = this.photos.concat(photos);
+            // Necessário fazer a atribuição para que o observer de photos
+            // entenda que o objeto foi alterado e atualize o componente
+            // se manipulasse o objeto com push, não funcionaria
+            if(!photos.length) this.hasMore = false;
+        });
+}
 
 }
