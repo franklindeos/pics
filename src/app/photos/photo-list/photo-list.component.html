@@ -1,5 +1,8 @@
 <p>photo-list works!</p>
 <h1>{{ title }}</h1>
+<p class="text-center text-muted" *ngIf="!photos.length">
+    Sorry, no photos
+</p>
 <div class="text-center mt-3 mb-3">
     <form>
         <input
@@ -12,4 +15,4 @@
     </form>
 </div>
 {{ filter }} {{ nome | uppercase}}
-<ap-photos [photos]="photos"></ap-photos>
+<ap-photos [photos]="photos | filterByDescription: filter"></ap-photos>
