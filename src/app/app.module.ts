@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app.routing.modules';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';
 
