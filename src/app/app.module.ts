@@ -7,6 +7,7 @@ import { ErrorsModule } from './errors/errors.module';
 import { PhotosModule } from './photos/photos.module';
 import { SigninComponent } from './home/signin/signin.component';
 import { HomeModule } from './home/home.module';
+import { VmessageComponent } from './shared/components/vmessage/vmessage.component';
 
 
 @NgModule({
