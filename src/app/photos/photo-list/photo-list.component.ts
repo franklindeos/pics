@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit} from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Subject } from 'rxjs/internal/Subject'
-import { debounceTime } from 'rxjs/operators'
 import { PhotoService} from '../photo/photo.service'
 
 @Component({
@@ -9,12 +7,11 @@ import { PhotoService} from '../photo/photo.service'
   templateUrl: './photo-list.component.html',
   styleUrls: ['./photo-list.component.sass']
 })
-export class PhotoListComponent implements OnInit,OnDestroy {
+export class PhotoListComponent implements OnInit {
 
   title = 'Alurapic'
   photos = []
   filter: string = ''
-  debounce: Subject<string> = new Subject<string>(); // Subject from RxJS
 
   hasMore: boolean = true;
   currentPage: number = 1;
@@ -36,25 +33,13 @@ export class PhotoListComponent implements OnInit,OnDestroy {
      * e preenche em photos
      */
     this.photos = this.activatedRoute.snapshot.data.photos
-    /**
-     * Incrição no debounce para receber no filtro os valores digitados
-     * em photo-list.component.html
-     */
-    this.debounce.pipe(debounceTime(300)).subscribe(filter => this.filter = filter);
-  }
-
-  ngOnDestroy(): void {
-    /**
-     * Caso não seja feita a remoção da lista debounce irá continuar com o valor recebido
-     * mesmo após a destruição do componente gerando um memory leak.
-     */
-    this.debounce.unsubscribe();
   }
 
   load() {
     this.photoService
         .listFromUserPaginated(this.userName, ++this.currentPage)
         .subscribe(photos => {
+          this.filter = '';
             this.photos = this.photos.concat(photos);
             // Necessário fazer a atribuição para que o observer de photos
             // entenda que o objeto foi alterado e atualize o componente
