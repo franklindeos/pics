@@ -8,6 +8,8 @@ import { PhotosModule } from './photos/photos.module';
 import { SigninComponent } from './home/signin/signin.component';
 import { HomeModule } from './home/home.module';
 import { VmessageComponent } from './shared/components/vmessage/vmessage.component';
+import { HeaderComponent } from './core/header/header.component';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { VmessageComponent } from './shared/components/vmessage/vmessage.compone
     AppRoutingModule,
     ErrorsModule,
     PhotosModule,
-    HomeModule
+    HomeModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
