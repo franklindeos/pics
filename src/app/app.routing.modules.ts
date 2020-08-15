@@ -29,9 +29,9 @@ const routes: Routes = [
         ]
     },
     { path: 'user/:userName', 
-        component: PhotoListComponent,
-        resolve: { // Resolve a propriedade antes do componentes ser carregado
-            photos: PhotoListResolver // photo-list.resolver.ts
+       component: PhotoListComponent,
+       resolve: { // Resolve a propriedade antes do componentes ser carregado
+         photos: PhotoListResolver // photo-list.resolver.ts
         }
     },
     { path: 'p/add', 
